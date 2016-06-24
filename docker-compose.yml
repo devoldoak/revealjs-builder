@@ -5,7 +5,7 @@ version: '2'
 services:
     builder:
         build: .
-        image: "revealjs-builder"
+        image: dkrpigeyre/revealjs-builder
         #network_mode: "host"
         ports:
         # For Slide share
