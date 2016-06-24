@@ -1,0 +1,29 @@
+# For Windows Users configure your shared volumes starting /c/Users/revealjs-builder (/c/Users is the only folder wih can be shared)
+# For Linux/Unix Users path can be relative
+
+version: '2'
+services:
+    builder:
+        build: .
+        image: "revealjs-builder"
+        #network_mode: "host"
+        ports:
+        # For Slide share
+        - "8080:8080"
+        # For Package download
+        - "8081:8081"
+        # For Live reload
+        # DO NOT CHANGE
+        - "35729:35729"
+        volumes:
+        - /c/Users/revealjs-builder/slides:/project-builder/resources/slides
+        - /c/Users/revealjs-builder/images:/project-builder/assets/site/images
+        depends_on:
+        - socketio
+        environment:
+        # To configure for broadcasting : server host for containers
+        - DOCKER_HOST_IP=192.168.99.100
+    socketio:
+        image: dkrpigeyre/revealjs-socketio
+        ports:
+        - "1948:1948"        

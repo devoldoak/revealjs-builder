@@ -1,0 +1,7 @@
+# Dockerfile for a reveal.js presenter environnement
+
+FROM dkrpigeyre/revealjs-presenter
+
+MAINTAINER Romain Pigeyre <rpigeyre@gmail.com>
+
+ADD site /usr/share/nginx/html/
