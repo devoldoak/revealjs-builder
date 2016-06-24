@@ -23,6 +23,8 @@ services:
         environment:
         # To configure for broadcasting : server host for containers
         - DOCKER_HOST_IP=192.168.99.100
+        # Must match with your socket io port exposed
+        - DOCKER_HOST_PORT_SOCKETIO=1948
     socketio:
         image: dkrpigeyre/revealjs-socketio
         ports:

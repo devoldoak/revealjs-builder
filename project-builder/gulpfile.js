@@ -19,6 +19,8 @@ const target = './assets'; // target folder
 // Read RevealJS script Templates
 var masterScriptRJS, clientScriptRJS, workScriptRJS = '';
 const socketIOToken = JSON.parse(fs.readFileSync(source + '/token/socketio.token'));
+const dockerHost =  process.env.DOCKER_HOST_IP;
+const dockerHostPortSocketIO = process.env.DOCKER_HOST_PORT_SOCKETIO;
 
 // ----- Tasks
 // -- Start WebServer
@@ -100,7 +102,7 @@ gulp.task('compile', ['copy-revealjs', 'load-templates'], function () {
 gulp.task('write-templates', function () {
 
     var pipeline = gulp.src(source + '/templates/*.js.tpl')
-                    .pipe(template({socketIOToken: socketIOToken, dockerHost: process.env.DOCKER_HOST_IP, dockerHostPortSocketIO: process.env.DOCKER_HOST_PORT_SOCKETIO}))
+                    .pipe(template({socketIOToken: socketIOToken, dockerHost: dockerHost, dockerHostPortSocketIO: dockerHostPortSocketIO}))
                     .pipe(gulp.dest(source + '/templates/compiled'));
 
     return pipeline;

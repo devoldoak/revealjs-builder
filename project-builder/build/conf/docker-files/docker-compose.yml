@@ -7,8 +7,6 @@ services:
         - "80:80"    
         environment:
         - MASTER_PASSWORD=yourmasterpassword
-        # Must match with your socket io port exposed
-        - DOCKER_HOST_PORT_SOCKETIO=1948
         # You could comment socketio service and replace link to an existing container with external_links
         depends_on:
         - socketio

@@ -5,7 +5,7 @@ Reveal.initialize({
         // Example values. To generate your own, see the socket.io server instructions.
         secret: '<%= socketIOToken.secret %>', // Obtained from the socket.io server. Gives this (the master) control of the presentation
         id: '<%= socketIOToken.socketId %>', // id, obtained from socket.io server
-        url: 'http://<%= socketIOToken.dockerHost %>:<%= socketIOToken.dockerHostPortSocketIO %>' // Location of socket.io server
+        url: 'http://<%= dockerHost %>:<%= dockerHostPortSocketIO %>' // Location of socket.io server
     },
 
     // Don't forget to add the dependencies
