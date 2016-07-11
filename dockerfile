@@ -1,4 +1,5 @@
 # Dockerfile for a reveal.js builder environment
+# Use Gulp 4 for watcher fix (file added detection)
 
 
 FROM alpine:3.3
@@ -13,11 +14,13 @@ RUN \
     apk add ca-certificates && \
     update-ca-certificates && \
     # Install NodeJS
-    apk add nodejs  && \
+    apk add nodejs \
+    # Only for Gulp 4 usage
+            git  && \
     # Update NPM
-    npm install -g npm
+    npm install -g npm && \
 
-RUN \
+#RUN \
     # Get revealJS
     cd /tmp && \
     wget https://github.com/hakimel/reveal.js/archive/${REVEALJS_VERSION}.tar.gz && \
@@ -26,14 +29,15 @@ RUN \
     mkdir -p /project-builder/build/resources && \
     mv reveal.js-${REVEALJS_VERSION} /project-builder/build/resources/revealjs && \
     # Purge temporary resources
-    rm /tmp/${REVEALJS_VERSION}.tar.gz
+    rm /tmp/${REVEALJS_VERSION}.tar.gz && \
 
-RUN \
+#RUN \
     # Install Gulp and plugins
     cd /project-builder && \
     npm init -f && \
-    npm install -g  gulp && \
-    npm install     gulp \
+    npm install -g gulpjs/gulp-cli && \
+    npm install     \
+                    gulpjs/gulp.git#4.0 \
                     gulp-connect \
                     gulp-zip \
                     gulp-filter \
@@ -44,7 +48,13 @@ RUN \
                     event-stream \
                     gulp-rename \
                     gulp-template \
-                    --save
+                    --save && \
+    # Only for Gulp 4 usage
+    apk del git \
+            pcre \
+            expat \
+            curl \
+            libssh2
 
 WORKDIR /project-builder
 
