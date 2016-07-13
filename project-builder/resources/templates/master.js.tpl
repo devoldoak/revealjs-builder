@@ -13,9 +13,6 @@ Reveal.initialize({
         { src: 'plugin/socket.io/socket.io.js', async: true },
         { src: 'plugin/multiplex/master.js', async: true },
 
-        // and if you want speaker notes
-        { src: 'plugin/notes-server/client.js', async: true },
-
         // other dependencies...
         { src: 'plugin/markdown/marked.js' },
         { src: 'plugin/markdown/markdown.js' },
